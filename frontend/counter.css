@@ -1,0 +1,173 @@
+/* Counter Page Specific Styles */
+body {
+    height: 100vh;
+    background: linear-gradient(45deg, #1a0d00, #2d1810, #0d0d0d);
+    background-size: 400% 400%;
+    animation: spookyGradient 8s ease-in-out infinite;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Floating Halloween elements */
+.floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.floating-elements::before,
+.floating-elements::after {
+    content: '🎃 👻 🦇 💀 🕷️';
+    position: absolute;
+    font-size: 2rem;
+    animation: float 20s linear infinite;
+    opacity: 0.3;
+}
+
+.floating-elements::before {
+    top: -50px;
+    left: -200px;
+    animation-delay: 0s;
+}
+
+.floating-elements::after {
+    top: -50px;
+    right: -200px;
+    animation-delay: -10s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+    }
+}
+
+.counter-container {
+    text-align: center;
+    color: #ff6b35;
+    text-shadow:
+        3px 3px 0px #8b0000,
+        6px 6px 10px rgba(0, 0, 0, 0.8),
+        0 0 30px #ff6b35,
+        0 0 60px #ff6b35;
+    z-index: 10;
+    position: relative;
+}
+
+.line1,
+.line3 {
+    font-size: 3rem;
+    margin: 0.5rem 0;
+    animation: flicker 3s infinite;
+}
+
+.line2 {
+    font-size: 8rem;
+    font-family: 'Nosifer', cursive;
+    color: #ff3030;
+    margin: 1rem 0;
+    animation: pulse 2s infinite, glow 2s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        text-shadow:
+            3px 3px 0px #8b0000,
+            6px 6px 10px rgba(0, 0, 0, 0.8),
+            0 0 30px #ff3030,
+            0 0 60px #ff3030;
+    }
+
+    50% {
+        text-shadow:
+            3px 3px 0px #8b0000,
+            6px 6px 10px rgba(0, 0, 0, 0.8),
+            0 0 50px #ff3030,
+            0 0 100px #ff3030,
+            0 0 150px #ff3030;
+    }
+}
+
+.instructions {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ff6b35;
+    font-size: 1.2rem;
+    text-align: center;
+    opacity: 0.7;
+    animation: fadeInOut 4s infinite;
+}
+
+.nav-link {
+    right: 2rem;
+}
+
+/* Loading state */
+.htmx-request .counter-container {
+    opacity: 0.7;
+    transform: scale(0.95);
+    transition: all 0.3s ease;
+}
+
+@keyframes successPulse {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .line1,
+    .line3 {
+        font-size: 2rem;
+    }
+
+    .line2 {
+        font-size: 5rem;
+    }
+
+    .instructions {
+        font-size: 1rem;
+        bottom: 1rem;
+    }
+
+    .nav-link {
+        right: 1rem;
+    }
+}

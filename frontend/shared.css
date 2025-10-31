@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&display=swap');
+
+/* Shared Halloween Theme Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Creepster', cursive;
+    color: #ff6b35;
+}
+
+/* Shared animations */
+@keyframes spookyGradient {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes flicker {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    95% {
+        opacity: 0.8;
+    }
+}
+
+@keyframes fadeInOut {
+
+    0%,
+    100% {
+        opacity: 0.8;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Shared navigation styles */
+.nav-link {
+    position: absolute;
+    top: 2rem;
+    color: #ff6b35;
+    text-decoration: none;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid #ff6b35;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    z-index: 20;
+}
+
+.nav-link:hover {
+    background: #ff6b35;
+    color: #000;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #ff6b35;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .nav-link {
+        font-size: 1rem;
+        padding: 0.5rem;
+        top: 1rem;
+    }
+}
