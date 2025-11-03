@@ -30,35 +30,7 @@ body {
     animation: fadeInOut 4s infinite;
 }
 
-.view-toggle {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 2rem;
-}
 
-.view-btn {
-    background: rgba(255, 107, 53, 0.2);
-    color: #ff6b35;
-    border: 2px solid #ff6b35;
-    padding: 0.75rem 1.5rem;
-    border-radius: 10px;
-    font-family: 'Creepster', cursive;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.view-btn:hover {
-    background: rgba(255, 107, 53, 0.3);
-    transform: translateY(-2px);
-}
-
-.view-btn.active {
-    background: #ff6b35;
-    color: #000;
-    box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
-}
 
 .nav-link {
     left: 2rem;
@@ -100,178 +72,9 @@ body {
     height: 400px;
     margin: 2rem 0;
     padding: 1rem;
-    overflow-x: auto;
 }
 
-/* Line Chart Styles */
-.line-chart-container {
-    position: relative;
-    height: 400px;
-    margin: 2rem 0;
-    padding: 2rem 1rem;
-    overflow-x: auto;
-}
 
-.line-chart {
-    width: 100%;
-    height: 300px;
-    border: 1px solid #ff6b35;
-    border-radius: 10px;
-    background: rgba(0, 0, 0, 0.2);
-}
-
-.line {
-    filter: drop-shadow(0 0 3px #ff3030);
-    animation: drawLine 2s ease-in-out;
-}
-
-@keyframes drawLine {
-    0% {
-        stroke-dasharray: 1000;
-        stroke-dashoffset: 1000;
-    }
-
-    100% {
-        stroke-dasharray: 1000;
-        stroke-dashoffset: 0;
-    }
-}
-
-.line-chart-labels {
-    position: relative;
-    height: 60px;
-    margin-top: 1rem;
-}
-
-.line-label {
-    position: absolute;
-    transform: translateX(-50%);
-    text-align: center;
-}
-
-.line-time {
-    font-size: 0.9rem;
-    color: #ff6b35;
-    margin-bottom: 0.25rem;
-}
-
-.line-count {
-    font-size: 1.1rem;
-    color: #fff;
-    font-weight: bold;
-    text-shadow: 0 0 5px #ff3030;
-}
-
-/* Timeline Styles */
-.timeline-container {
-    position: relative;
-    height: 400px;
-    margin: 2rem 0;
-    padding: 2rem 1rem;
-}
-
-.timeline-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-    font-size: 1.2rem;
-    color: #ff6b35;
-}
-
-.timeline {
-    position: relative;
-    height: 200px;
-    background: linear-gradient(to right,
-            transparent 0%,
-            rgba(255, 107, 53, 0.1) 20%,
-            rgba(255, 107, 53, 0.2) 50%,
-            rgba(255, 107, 53, 0.1) 80%,
-            transparent 100%);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.timeline::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(to right, #ff3030, #ff6b35, #ff3030);
-    animation: pulse 3s infinite;
-}
-
-.timeline-event {
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background: radial-gradient(circle, #ff3030, #ff6b35);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 10;
-}
-
-.timeline-event:hover {
-    transform: translate(-50%, -50%) scale(1.2);
-    z-index: 20;
-}
-
-.event-pulse {
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    border: 2px solid #ff3030;
-    border-radius: 50%;
-    animation: eventPulse 2s infinite;
-}
-
-@keyframes eventPulse {
-    0% {
-        transform: scale(0.8);
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(2);
-        opacity: 0;
-    }
-}
-
-.event-label {
-    position: absolute;
-    top: -60px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
-    padding: 0.5rem;
-    border-radius: 5px;
-    border: 1px solid #ff6b35;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    white-space: nowrap;
-    pointer-events: none;
-}
-
-.timeline-event:hover .event-label {
-    opacity: 1;
-}
-
-.event-time {
-    font-size: 0.8rem;
-    color: #ff6b35;
-    text-align: center;
-}
-
-.event-count {
-    font-size: 1rem;
-    color: #fff;
-    font-weight: bold;
-    text-align: center;
-}
 
 .chart {
     display: flex;
@@ -333,6 +136,32 @@ body {
 
 .bar:hover .bar-value {
     opacity: 1;
+}
+
+.tooltip {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #ff6b35;
+    font-size: 2rem;
+    z-index: 1000;
+    pointer-events: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    display: none;
+}
+
+.tooltip-time {
+    color: #ff6b35;
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.tooltip-count {
+    color: #fff;
+    font-size: 2rem;
 }
 
 .no-data {
@@ -419,57 +248,12 @@ body {
         padding: 0.5rem;
     }
 
-    .view-toggle {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .view-btn {
-        font-size: 0.9rem;
-        padding: 0.5rem 1rem;
-    }
-
     .chart-container {
         height: 300px;
     }
 
     .bar-label {
         font-size: 0.7rem;
-    }
-
-    .line-chart-container {
-        height: 300px;
-        padding: 1rem 0.5rem;
-    }
-
-    .line-chart {
-        height: 200px;
-    }
-
-    .line-time {
-        font-size: 0.7rem;
-    }
-
-    .line-count {
-        font-size: 0.9rem;
-    }
-
-    .timeline-container {
-        height: 300px;
-        padding: 1rem 0.5rem;
-    }
-
-    .timeline {
-        height: 150px;
-    }
-
-    .timeline-header {
-        font-size: 1rem;
-    }
-
-    .event-label {
-        top: -50px;
-        font-size: 0.8rem;
     }
 
     .settings-container {

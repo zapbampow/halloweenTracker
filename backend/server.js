@@ -22,9 +22,21 @@ db.serialize(() => {
   )`);
 });
 
-// Helper function to format time as HH:MM
+// Helper function to parse SQLite timestamp and convert to local time
+function parseTimestamp(sqliteTimestamp) {
+  // SQLite CURRENT_TIMESTAMP stores UTC time in format: YYYY-MM-DD HH:MM:SS
+  // We need to explicitly tell JavaScript this is UTC
+  const utcDate = new Date(sqliteTimestamp + " UTC");
+  return utcDate;
+}
+
+// Helper function to format time as 12-hour AM/PM in local timezone
 function formatTime(date) {
-  return date.toTimeString().substring(0, 5);
+  return date.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
 }
 
 // Helper function to generate minute-by-minute stats
@@ -36,14 +48,14 @@ function generateMinuteStats(records, callback) {
   // Group records by minute
   const recordsByMinute = {};
   records.forEach((record) => {
-    const date = new Date(record.timestamp);
+    const date = parseTimestamp(record.timestamp);
     const timeKey = formatTime(date);
     recordsByMinute[timeKey] = (recordsByMinute[timeKey] || 0) + 1;
   });
 
   // Get first and last record times
-  const firstRecord = new Date(records[0].timestamp);
-  const lastRecord = new Date(records[records.length - 1].timestamp);
+  const firstRecord = parseTimestamp(records[0].timestamp);
+  const lastRecord = parseTimestamp(records[records.length - 1].timestamp);
 
   // Generate complete timeline
   const stats = [];
@@ -132,10 +144,10 @@ app.delete("/api/reset", (req, res) => {
     }
 
     console.log(`🎃 Halloween Tracker reset! Deleted ${this.changes} records.`);
-    res.json({ 
-      message: "All records have been reset for a new Halloween night!", 
+    res.json({
+      message: "All records have been reset for a new Halloween night!",
       deletedCount: this.changes,
-      newCount: 0 
+      newCount: 0,
     });
   });
 });
